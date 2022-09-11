@@ -18,10 +18,10 @@ clean:
 	rm -f $(ID_NAME).s9pk
 	rm -f scripts/*.js
 
-$(ID_NAME).s9pk: manifest.yaml instructions.md scripts/*.sh actions/*.sh icon.png LICENSE scripts/embassy.js image.tar
+$(ID_NAME).s9pk: manifest.yaml instructions.md scripts/*.sh icon.svg LICENSE scripts/embassy.js image.tar
 	embassy-sdk pack
 
-image.tar: Dockerfile docker_entrypoint.sh scripts/*.sh actions/*.sh
+image.tar: Dockerfile docker_entrypoint.sh scripts/*.sh 
 	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/$(ID_NAME)/main:$(VERSION) --platform=linux/arm64/v8 -o type=docker,dest=image.tar -f ./Dockerfile .
 
 scripts/embassy.js: $(TS_FILES)
