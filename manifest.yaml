@@ -1,7 +1,7 @@
 id: searxng 
 title: "SearXNG"
 version: 1.0.0
-release-notes: "Initial Release for EmbassyOS"
+release-notes: Initial Release for embassyOS
 license: mit
 wrapper-repo: "https://github.com/Start9Labs/searxng-wrapper"
 upstream-repo: "https://github.com/searxng/searxng-docker"
@@ -15,9 +15,8 @@ description:
     SearXNG is a free internet metasearch engine which aggregates results from more than 70 search services. Users are neither tracked nor profiled. Additionally, SearXNG can be used over Tor for online anonymity.
 assets:
   license: LICENSE
-  icon: icon.svg
+  icon: icon.png
   instructions: instructions.md
-  docker-images: image.tar
 main:
   type: docker
   image: main
@@ -25,19 +24,11 @@ main:
   args: []
   mounts:
     main: /root
-    # redis: /var/lib/redis
-    # caddy-data: /data
-    # caddy-config: /config
 health-checks:
-  main:
+  web-ui:
     name: Web UI
     success-message: SearXNG is ready to visit in a web browser
-    type: docker
-    image: main
-    entrypoint: check-web.sh
-    args: []
-    system: false
-    io-format: json
+    type: script
 config: 
   get:
     type: script
@@ -48,12 +39,6 @@ properties:
 volumes:
   main:
     type: data
-  # redis:
-  #   type: data
-  # caddy-data:
-  #   type: data
-  # caddy-config:
-  #   type: data
 interfaces:
   main:
     name: SearXNG Web Interface
@@ -92,8 +77,8 @@ backup:
     args:
       - duplicity
       - restore
-      - /root/data
       - /mnt/backup
+      - /root/data
     mounts:
       BACKUP: "/mnt/backup"
       main: "/root/data"
@@ -106,4 +91,3 @@ migrations:
    "*":
      type: script
      args: ["to"]
-

@@ -1,8 +1,12 @@
-FROM --platform=linux/arm64/v8 redis:alpine as redis-builder
+FROM redis:alpine as redis-builder
 
-FROM --platform=linux/arm64/v8 caddy:2-alpine as caddy-builder
+FROM caddy:2-alpine as caddy-builder
 
-FROM --platform=linux/arm64/v8 searxng/searxng:latest as runner
+FROM searxng/searxng:latest as runner
+
+# arm64 or amd64
+ARG PLATFORM
+ARG ARCH
 
 USER root
 
@@ -22,5 +26,4 @@ COPY searxng.png /usr/local/searxng/searx/static/themes/simple/img/searxng.png
 COPY searxng.svg /usr/local/searxng/searx/static/themes/simple/img/searxng.svg
 
 ADD docker_entrypoint.sh /usr/local/bin/docker_entrypoint.sh
-ADD scripts/check-web.sh /usr/local/bin/check-web.sh
 RUN chmod a+x /usr/local/bin/*.sh

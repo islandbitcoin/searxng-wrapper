@@ -38,19 +38,19 @@ export const getConfig: T.ExpectedExports.getConfig = compat.getConfig({
       "description": "Turns on data collection for search metrics when using SearXNG.",
       "type": "boolean",
       "default": false,
-    },
-    "email-address": {
-      "type": "string",
-      "name": "Email Address",
-      "description": "Your Email address - required to create an SSL certificate.",
-      "nullable": false,
-      "default": "youremail@domain.com",
-    },
-    "public-host": {
-      "type": "string",
-      "name": "Public Domain Name",
-      "description": "Enter a domain name here if you want to share your SearXNG engine publicly. You will also need to modify your domain name's DNS settings to point to your Embassy.",
-      "nullable": true,
-      "placeholder": "https://search.mydomain.com"
-    }
+    } //,
+    // "email-address": {
+    //   "type": "string",
+    //   "name": "Email Address",
+    //   "description": "Your Email address - required to create an SSL certificate.",
+    //   "nullable": false,
+    //   "default": "youremail@domain.com",
+    // },
+    // "public-host": {
+    //   "type": "string",
+    //   "name": "Public Domain Name",
+    //   "description": "Enter a domain name here if you want to share your SearXNG engine publicly. You will also need to modify your domain name's DNS settings to point to your Embassy.",
+    //   "nullable": true,
+    //   "placeholder": "https://search.mydomain.com"
+    // }
 });
